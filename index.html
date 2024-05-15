@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+  <head>
+    <!-- A-Frameを読み込む -->
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <!-- AR.jsを読み込む -->
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+  </head>
+  <body style="margin: 0; overflow: hidden">
+    <!-- シーンの作成、VRモードのUI非表示 -->
+    <a-scene embedded arjs vr-mode-ui="enabled: false;" renderer="logarithmicDepthBuffer: true;">
+      <a-assets>
+        <!-- 3Dモデルを読み込む -->
+        <a-asset-item id="model" src="AR.glb" scale="1 1 1"></a-asset-item>
+      </a-assets>
+      <!-- マーカーを設定する -->
+      <a-marker type="pattern" url="pattern-AR.patt">
+        <!-- 3Dモデルを呼び出す -->
+        <a-entity gltf-model="#model" rotation="0 0 0"></a-entity>
+      </a-marker>
+      <a-light type="ambient" color="#FFA57A"></a-light>
+      <!-- カメラを追加 -->
+      <a-entity camera raycaster= "objects: .AAA" cursor="fuse: false; rayOrigin: mouse;"></a-entity>
+    </a-scene>
+  </body>
+  <script>
+      //glTFの表示が暗くなる問題に対処
+      document.querySelector("a-scene").renderer.gammaOutput=true;
+  </script>
+</html>
